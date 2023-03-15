@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Hunter html page</title>
@@ -94,7 +95,78 @@
         <div><img  width=110 height=110  onclick="butcheck(22)" src="bush.png"></div>
         <div><img  width=110 height=110  onclick="butcheck(23)" src="bush.png"></div>
          </div>
-      </div>
-
+        </div>
+        <script>
+          var ids=["picx0","picx1","picx2","picx3","picx4","picx5","picx6","picx7","picx8","picx9","picx10",
+            "picx11","picx12","picx13","picx14","picx15","picx16","picx17","picx18","picx19","picx20","picx21","picx22","picx23"]
+            var checkCount = 0
+            var penalty = 0
+            var lastCheck = 0
+            var mouseLocation = 13
+            var catLocation = 21
+            let gameOver = false
+            function check(position){
+                if(gameOver){
+                    return;
+                }
+                var id = ids[position]
+                img = document.getElementById(id);
+                if(position==mouseLocation){
+                    img.src = "mouse.png";
+                    gameOver = true;
+                    penalty -= 3;
+                }
+                else if(position==catLocation){
+                    img.src = "catliketiger.png";
+                    gameOver = true;
+                    penalty += 4;
+                }
+                else{
+                    img.src = "grass.png";
+                }
+                checkCount++;
+                penalty++;
+        
+                document.getElementById("bushes").innerHTML = "Bushes checked is: " +checkCount;
+                document.getElementById("penalty").innerHTML = "penalty: "+penalty;
+                lastCheck = position;
+                }
+                function help(){
+                    const mouseR = Math.floor(mouseLocation/4);
+                    const catR = Math.floor(catLocation/4);
+                    
+              const catC = catLocation%6;
+                    const mouseC = mouseLocation%6;
+        
+                    const lastRow = Math.floor(lastCheck/4);
+                    const lastCol = lastCheck%6;
+                   
+                    penalty = penalty+2;
+                    document.getElementById("penalty").innerHTML = "Penalty is "+penalty;
+            
+               if((Math.abs(mouseC-lastCol)<=1)&&Math.abs(mouseR-lastRow)<=1 &&( Math.abs(catR-mouseR)>1||Math.abs(catC-mouseC)>1)){
+                        document.getElementById("help").innerHTML="squeak";
+                    }
+                    
+                   else if(( Math.abs(catC-lastCol)<=1)&&(Math.abs(catR-lastRow)<=1) &&(Math.abs(catR-mouseR)>1||Math.abs(catC-mouseC)>1)){
+                        document.getElementById("help").innerHTML= "meow";
+                    }
+                   
+                    
+                   else{
+                    document.getElementById("help").innerHTML= "sorry, no help available";
+                   }
+                }
+                function restart(){
+                    mouseLocation = Math.floor(Math.random()*24)
+                    catLocation = Math.floor(Math.random()*24)
+                    document.getElementById("bushes").innerHTML = "Bushes checked is 0"
+                    document.getElementById("penalty").innerHTML = "Penalty is 0"
+                    for(var i=0;i<=23;i++){
+                        document.getElementById(ids[i]).src="smallbush.jpg"
+                        
+                    }
+                }
+          </script>
     </body>
     </html>
