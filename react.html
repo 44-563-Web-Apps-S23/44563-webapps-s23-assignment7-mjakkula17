@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>react check</title>
+  <title>React timer Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -13,52 +13,47 @@
 
   <h2>Speed check by Mounika Jakkula</h2>
 
-  <div id="target"> Your time </div>
-  <button type="button"
-  class="btn btn-primary"
-  onclick="startTime()">
-  Start Timer</button>
-  <div id="counter"> Count </div>
-  <button type="button"
-  class="btn btn-primary"
-  onclick="recordTime()">
-  React</button>
-  
-  <p id="countdown">I will become red </p>
-  <script> 
-  let reactTime 
-  function recordTime(){
-    reactTime=undefined;
-    //Set(reactTime)= new Date.now();
-    reactTime= Date.now();
-    console.log(reactTime);
-  }
-  let i=0;
-  setTimeout( () => {
-        console.log("Entered anononymouse fn");
-         if(reactTime==undefined){
-            console.log("entered if");
-            document.getElementById('target').innerHTML="Too Slow";
-         }
-         else{
-            console.log("entered else");
-            let endTime;
-            endTime=Date.now();
-            console.log("endtime is"+endTime);
-            let temp=endTime-reactTime;
-            console.log(temp);
-            document.getElementById('target').innerHTML="Time was "+temp;
-         }
-        },8*1000);
-    
-    function setTimeou(i)
-   {
-        setTimeout(()=>{
-                document.getElementById('countdown').innerHTML=i;
-            },(rv-i)*1000);
-    }
-  
-  </script>
 
+  <div class="container border" style="background-color: rgb(122, 207, 173);">
+    <p id="target">Your Time</p>
+  </div>
+  <div class="container border" style="background-color: rgb(243, 126, 188);">
+    <p id="counter">Count</p>
+  </div>
+  <br>
+  <div class="container">
+    <button type="button" class="btn btn-primary" onclick="startTime()">Start Timer</button>
+    <button type="button" class="btn btn-info" onclick="recordTime()">React</button>
+  </div>
+ 
+  <script> 
+    var reactTime = undefined
+    var strtCnt=8
+    function recordTime(){
+        reactTime = Date.now()
+        console.log(reactTime)
+    }
+    function randomStart(){
+        strtCnt = Math.floor(Math.random()*(10-2+1)+2)
+        startTime()
+    }
+    function startTime(){
+        for(let i=0;i<=strtCoun;i++){
+            setTimeout(() => {
+                document.getElementById('counter').innerHTML = "Count: "+i
+            }, (strtCnt-i)*1000)
+        }
+        setTimeout(()=>{
+        if(reactTime==undefined){
+            document.getElementById('target').innerHTML="Too Slow"
+        }
+        else{
+            endTime = Date.now()
+            document.getElementById('target').innerHTML = "Time was "+(endTime-reactTime)
+        }
+        },strtCnt*1000)
+    }
+  </script>
 </body>
+
 </html>
