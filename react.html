@@ -28,20 +28,20 @@
  
   <script> 
     var reactTime = undefined
-    var strtCoun=8
+    var strtCnt = 8
     function recordTime(){
         reactTime = Date.now()
         console.log(reactTime)
     }
     function randomStart(){
-        strtCoun = Math.floor(Math.random()*(10-2+1)+2)
+        strtCnt = Math.floor(Math.random()*(10-2+1)+2)
         startTime()
     }
     function startTime(){
-        for(let i=0;i<=strtCoun;i++){
+        for(let i=0;i<=strtCnt;i++){
             setTimeout(() => {
                 document.getElementById('counter').innerHTML = "Count: "+i
-            }, (strtCoun-i)*1000)
+            }, (strtCnt-i)*1000)
         }
         setTimeout(()=>{
         if(reactTime==undefined){
@@ -54,6 +54,6 @@
         },strtCoun*1000)
     }
   </script>
-  
+
 </body>
 </html>
